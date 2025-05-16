@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 use function Pest\Laravel\postJson;
 
 it('should register user', function () {
@@ -17,7 +19,7 @@ it('should register user', function () {
 });
 
 it('should return validation error', function () {
-    $admin = makeAdminUser();
+    $admin = User::factory()->admin()->create();
     $response = postJson(route('api.auth.register'), [
         'role' => 'admin',
         'name' => 'Admin User',

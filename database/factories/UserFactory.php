@@ -41,4 +41,34 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    /**
+     * Indicate that the model's role should be admin.
+     */
+    public function admin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'admin',
+        ]);
+    }
+
+    /**
+     * Indicate that the model's role should be employer.
+     */
+    public function employer(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'employer',
+        ]);
+    }
+
+    /**
+     * Indicate that the model's role should be candidate.
+     */
+    public function candidate(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'candidate',
+        ]);
+    }
 }
