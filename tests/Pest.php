@@ -11,6 +11,8 @@
 |
 */
 
+use App\Models\User;
+
 pest()->extend(Tests\TestCase::class)
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
     ->in('Feature');
@@ -41,7 +43,29 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function makeAdminUser(): User
 {
-    // ..
+    return User::query()->create([
+        'name' => 'Admin User',
+        'email' => 'admin@user.com',
+        'password' => Hash::make('password'),
+    ]);
+}
+
+function makeCandidateUser(): User
+{
+    return User::query()->create([
+        'name' => 'Candidate User',
+        'email' => 'candidate@user.com',
+        'password' => Hash::make('password'),
+    ]);
+}
+
+function makeEmployerUser(): User
+{
+    return User::query()->create([
+        'name' => 'Employer User',
+        'email' => 'employer@user.com',
+        'password' => Hash::make('password'),
+    ]);
 }

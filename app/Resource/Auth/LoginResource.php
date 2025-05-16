@@ -2,9 +2,9 @@
 
 namespace App\Resource\Auth;
 
-use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Resource;
 
-class LoginResource extends Data
+class LoginResource extends Resource
 {
     public function __construct(
         public string $accessToken,

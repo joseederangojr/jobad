@@ -1,29 +1,26 @@
 <?php
 
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Tests\TestCase;
+use function Pest\Laravel\postJson;
 
 it('should be able to login', function () {
-    /** @var TestCase $this */
-    User::query()->create(['name' => 'Test User', 'email' => 'test@user.com', 'password' => Hash::make('password')]);
-    $response = $this->post(route('api.auth.login'), [
-        'email' => 'test@user.com',
+    $admin = makeAdminUser();
+    $response = postJson(route('api.auth.login'), [
+        'email' => $admin->email,
         'password' => 'password',
     ]);
 
-    $response
-        ->assertStatus(200);
+    expect($response->status())->toBe(201);
+    expect($response->json())->toHaveCount(2);
+    expect($response->json('accessToken'))->toBeString();
+    expect($response->json('expiresIn'))->toBeInt();
 });
 
 it('should return validation error', function () {
-    /** @var TestCase $this */
-    User::query()->create(['name' => 'Test User', 'email' => 'test@user.com', 'password' => Hash::make('password')]);
-    $response = $this->post(route('api.auth.login'), [
-        'email' => 'test@user.com',
+    $admin = makeAdminUser();
+    $response = postJson(route('api.auth.login'), [
+        'email' => $admin->email,
         'password' => 'wrong',
     ]);
-
-    $response
-        ->assertStatus(422);
+    expect($response->status())->toBe(422);
+    expect($response->json('errors.email'))->toBe(['Invalid email or password.']);
 });
