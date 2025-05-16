@@ -49,6 +49,7 @@ function makeAdminUser(): User
         'name' => 'Admin User',
         'email' => 'admin@user.com',
         'password' => Hash::make('password'),
+        'role' => 'admin',
     ]);
 }
 
@@ -58,6 +59,7 @@ function makeCandidateUser(): User
         'name' => 'Candidate User',
         'email' => 'candidate@user.com',
         'password' => Hash::make('password'),
+        'role' => 'candidate',
     ]);
 }
 
@@ -67,5 +69,6 @@ function makeEmployerUser(): User
         'name' => 'Employer User',
         'email' => 'employer@user.com',
         'password' => Hash::make('password'),
+        'role' => 'employer',
     ]);
 }

@@ -18,6 +18,7 @@ class Register
             'name' => $registerData->name,
             'email' => $registerData->email,
             'password' => Hash::make($registerData->password),
+            'role' => $registerData->role,
         ]);
         $token = $auth->tokenById($user->id);
 
