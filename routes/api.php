@@ -18,4 +18,5 @@ Route::middleware([JwtMiddleware::class])->name('auth.')->group(function () {
 
 Route::middleware([JwtMiddleware::class])->name('job-ad.')->group(function () {
     Route::post('job-ad', [JobAdController::class, 'store'])->name('store');
+    Route::get('job-ad', [JobAdController::class, 'index'])->name('index');
 });

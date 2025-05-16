@@ -29,6 +29,7 @@ class JobAdFactory extends Factory
             'employment_type' => fake()->randomElement(['full-time', 'internship', 'part-time', 'contract']),
             'seniority' => fake()->randomElement(['entry-level', 'mid-level', 'senior', 'lead', 'principal']),
             'schedule' => fake()->randomElement(['on-site', 'remote', 'hybrid']),
+            'status' => fake()->randomElement(['pending', 'approved', 'rejected']),
             'years_of_experience' => '2-5',
             'keywords' => fake()->words(5),
             'occupation' => "{$fake->name()} Occupation",
@@ -51,6 +52,8 @@ class JobAdFactory extends Factory
                     'value' => '<ul><li>Take an active role in shaping an innovative, growth-orientated international corporate group from its early stages; seize the opportunity to become irreplaceable!</li><li>Take on responsibility as you become an important part of a young, ambitious, and friendly team with a shared desire to develop its skills.</li><li>Enjoy opportunities to work independently, with flexible hours and hybrid remote/office working options.</li><li>Enjoy top-notch employee benefits: 30 paid vacation days, the latest tech, individual development plan, prepaid spending card (50€ monthly budget) and much more</li><li>Take your skills, talents, and career to the next level as you grow with us.</li></ul><strong>Have we convinced you? Then we can’t wait to read your application!</strong><br> <br>All our employees have equal career opportunities at mrge, regardless of gender, origin, ethnicity, religion, sexual orientation, age, or other personal attributes.<br>Candidates will be considered and selected equally based on their skills, qualification, and the needs of the company.<br>We know that experience and skills are matters of development and gain while working.<br>Therefore, we encourage you to apply even if your profile does not meet 100% of the requirements for this position.',
                 ],
             ],
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 
@@ -59,6 +62,13 @@ class JobAdFactory extends Factory
         return $this->state(fn () => [
             'created_by_id' => $owner->id,
             'updated_by_id' => $owner->id,
+        ]);
+    }
+
+    public function status(string $status)
+    {
+        return $this->state(fn () => [
+            'status' => $status,
         ]);
     }
 }

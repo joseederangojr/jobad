@@ -33,13 +33,13 @@ class JobAdResource extends Resource
 
         public ?UserResource $createdBy,
         #[MapName('created_by_id')]
-        public int $createdById,
+        public ?int $createdById,
         #[MapName('created_at')]
         public Carbon $createdAt,
 
         public ?UserResource $updatedBy,
         #[MapName('updated_by_id')]
-        public int $updatedById,
+        public ?int $updatedById,
         #[MapName('updated_at')]
         public Carbon $updatedAt,
 

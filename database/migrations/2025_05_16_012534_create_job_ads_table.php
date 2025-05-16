@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('occupation');
             $table->string('occupation_category');
             $table->json('job_descriptions')->default('[]');
+            $table->string('status', 20)->default('pending');
             $table->unsignedBigInteger('created_by_id');
             $table->unsignedBigInteger('updated_by_id');
             $table->unsignedBigInteger('deleted_by_id')->nullable();
