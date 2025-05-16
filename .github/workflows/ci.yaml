@@ -24,4 +24,4 @@ jobs:
       - name: Generate JWT
         run: php artisan jwt:secret
       - name: Tests
-        run: php artisan test
+        run: ./vendor/bin/pest
