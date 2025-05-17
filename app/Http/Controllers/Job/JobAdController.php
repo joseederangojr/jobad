@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Job;
 
 use App\Actions\JobAd\GetEmployerJobAdCount;
 use App\Actions\JobAd\GetExternalJobAds;
+use App\Actions\JobAd\GetJobAdById;
 use App\Actions\JobAd\GetJobAds;
 use App\Actions\JobAd\StoreJobAd;
 use App\Data\JobAd\StoreJobAdData;
 use App\Events\JobAd\FirstJobAdCreatedEvent;
+use App\Http\Controllers\Controller;
 use App\Resource\JobAd\JobAdResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +28,11 @@ class JobAdController extends Controller
         }
 
         return response()->json($jobAds);
+    }
+
+    public function show(int $id, GetJobAdById $get): JobAdResource
+    {
+        return JobAdResource::from($get->handle($id));
     }
 
     public function store(StoreJobAdData $data, StoreJobAd $store, GetEmployerJobAdCount $count): JobAdResource

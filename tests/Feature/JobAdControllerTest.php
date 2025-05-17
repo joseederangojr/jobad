@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Notifications\JobAd\FirstJobAdCreatedNotification;
 use App\Resource\JobAd\JobAdResource;
 
+use function Pest\Laravel\getJson;
 use function Pest\Laravel\spy;
 
 it('should store job ad', function () {
@@ -85,4 +86,16 @@ it('should get all items for job ad for admins', function () {
     $response
         ->assertOk()
         ->assertJsonPath('total', 5);
+});
+
+it('should show job ad', function () {
+    $employer = User::factory()->employer()->createOne();
+    $jobAd = JobAd::factory()->owner(owner: $employer)->status('approved')->createOne();
+    JobAd::factory()->owner(owner: $employer)->status('pending')->createMany(2);
+
+    $response = getJson(route('api.job-ad.show', ['id' => $jobAd->id]));
+
+    $response
+        ->assertOk()
+        ->assertJson(JobAdResource::from($jobAd)->toArray());
 });

@@ -12,7 +12,7 @@ class JobAdPolicy
         return true;
     }
 
-    public function view(?User $user, JobAd $jobAd): bool
+    public function view(): bool
     {
         return true;
     }
@@ -24,6 +24,16 @@ class JobAdPolicy
 
     public function update(?User $user, JobAd $jobAd): bool
     {
-        return $user?->role === 'admin' && ($user?->role === 'employer' && $user->id === $jobAd->created_by_id);
+        return $user?->role === 'employer' && $user->id === $jobAd->created_by_id;
+    }
+
+    public function approve(?User $user): bool
+    {
+        return $user->role === 'admin';
+    }
+
+    public function reject(?User $user): bool
+    {
+        return $user->role === 'admin';
     }
 }
