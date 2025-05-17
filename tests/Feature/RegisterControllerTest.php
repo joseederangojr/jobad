@@ -12,14 +12,16 @@ it('should register user', function () {
         'password' => 'password',
         'password_confirmation' => 'password',
     ]);
-    expect($response->status())->toBe(201);
-    expect($response->json())->toHaveCount(2);
-    expect($response->json('accessToken'))->toBeString();
-    expect($response->json('expiresIn'))->toBeInt();
+
+    $response
+        ->assertCreated()
+        ->assertJsonCount(2)
+        ->assertJsonStructure(['accessToken', 'expiresIn']);
 });
 
 it('should return validation error', function () {
     $admin = User::factory()->admin()->create();
+
     $response = postJson(route('api.auth.register'), [
         'role' => 'admin',
         'name' => 'Admin User',
@@ -27,6 +29,6 @@ it('should return validation error', function () {
         'password' => 'password',
         'password_confirmation' => 'password',
     ]);
-    expect($response->status())->toBe(422);
-    expect($response->json('errors.email'))->toBe(['The email has already been taken.']);
+
+    $response->assertInvalid(['email']);
 });

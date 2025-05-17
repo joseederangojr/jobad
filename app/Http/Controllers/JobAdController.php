@@ -31,7 +31,6 @@ class JobAdController extends Controller
     public function store(StoreJobAdData $data, StoreJobAd $store, GetEmployerJobAdCount $count): JobAdResource
     {
         $user = Auth::user();
-
         $jobAd = $store->handle($data);
 
         if ($count->handle($user->id) === 1) {

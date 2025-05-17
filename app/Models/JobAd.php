@@ -58,28 +58,24 @@ class JobAd extends Model
     {
         parent::boot(); // call so parent will not be mad
         static::creating(function (JobAd $jobAd) {
-            /** @var Auth $auth */
-            $auth = auth();
-            if ($auth->user()) {
-                $jobAd->created_by_id = $auth->user()->id;
-                $jobAd->updated_by_id = $auth->user()->id;
+            $user = Auth::user();
+            if ($user) {
+                $jobAd->created_by_id = $user->id;
+                $jobAd->updated_by_id = $user->id;
             }
         });
 
         static::updating(function (JobAd $jobAd) {
-            /** @var Auth $auth */
-            $auth = auth();
-            if ($auth->user()) {
-                $jobAd->created_by_id = $auth->user()->id;
-                $jobAd->updated_by_id = $auth->user()->id;
+            $user = Auth::user();
+            if ($user) {
+                $jobAd->updated_by_id = $user->id;
             }
         });
 
         static::deleting(function (JobAd $jobAd) {
-            /** @var Auth $auth */
-            $auth = auth();
-            if ($auth->user()) {
-                $jobAd->deleted_by_id = $auth->user()->id;
+            $user = Auth::user();
+            if ($user) {
+                $jobAd->deleted_by_id = $user->id;
             }
         });
     }

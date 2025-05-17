@@ -10,10 +10,10 @@ it('should get a new token', function () {
         'email' => $admin->email,
         'password' => 'password',
     ])->json('accessToken');
-    $response = postJson(uri: route('api.auth.refresh'), headers: [
-        'Authorization' => "Bearer {$accessToken}",
-    ]);
 
-    expect($response->status())->toBe(201);
-    expect($response->json('accessToken'))->not->toBe($accessToken);
+    $response = actingAsJWT($admin)->postJson(uri: route('api.auth.refresh'));
+
+    $response->assertCreated()
+        ->assertExactJsonStructure(['accessToken'])
+        ->assertJsonMissingExact(['accessToken' => $accessToken]);
 });

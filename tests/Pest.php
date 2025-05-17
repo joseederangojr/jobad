@@ -11,6 +11,12 @@
 |
 */
 
+use App\Models\User;
+use Tests\TestCase;
+use Tymon\JWTAuth\Facades\JWTAuth;
+
+use function Pest\Laravel\withHeader;
+
 pest()->extend(Tests\TestCase::class)
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
     ->in('Feature');
@@ -40,3 +46,10 @@ expect()->extend('toBeOne', function () {
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
+
+function actingAsJWT(User $user): TestCase
+{
+    $token = JWTAuth::fromUser($user);
+
+    return withHeader('Authorization', "Bearer {$token}");
+}
