@@ -31,7 +31,7 @@ class JobAdResource extends Resource
         #[MapName('job_descriptions')]
         public array $jobDescriptions,
 
-        public string $status,
+        public ?string $status,
 
         public ?UserResource $createdBy,
         #[MapName('created_by_id')]
