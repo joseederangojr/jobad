@@ -23,5 +23,8 @@ jobs:
         run: composer global require laravel/pint
       - name: Run Pint
         run: pint
-      - name: Commit linted files
+      - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: enforce code style"
+          commit_options: '--no-verify'
