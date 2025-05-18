@@ -14,7 +14,10 @@ class JwtMiddleware
         try {
             JWTAuth::parseToken()->authenticate();
         } catch (JWTException $e) {
-            return response()->json(['error' => 'InvalidToken', 'message' => 'Invalid token'], JsonResponse::HTTP_UNAUTHORIZED);
+            return response()->json(
+                ['error' => 'InvalidToken', 'message' => 'Invalid token'],
+                JsonResponse::HTTP_UNAUTHORIZED
+            );
         }
 
         return $next($request);

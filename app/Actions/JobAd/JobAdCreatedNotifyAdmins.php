@@ -16,10 +16,13 @@ class JobAdCreatedNotifyAdmins
     public function handle(JobAd $jobAd, User $createdBy, array $admins): void
     {
         if ($createdBy->job_ads_count === 1) {
-            Notification::send($admins, new FirstJobAdCreatedNotification(
-                employer: $createdBy,
-                job: $jobAd
-            ));
+            Notification::send(
+                $admins,
+                new FirstJobAdCreatedNotification(
+                    employer: $createdBy,
+                    job: $jobAd
+                )
+            );
         }
     }
 }

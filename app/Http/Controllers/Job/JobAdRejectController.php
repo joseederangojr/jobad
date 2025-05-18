@@ -13,8 +13,12 @@ class JobAdRejectController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(RejectJobAdData $data, int $id, RejectJobAd $reject, GetJobAdById $get): JobAdResource
-    {
+    public function __invoke(
+        RejectJobAdData $data,
+        int $id,
+        RejectJobAd $reject,
+        GetJobAdById $get
+    ): JobAdResource {
         return JobAdResource::from($reject->handle($get->handle($id)));
     }
 }

@@ -15,9 +15,10 @@ class LoginController extends Controller
      */
     public function __invoke(LoginData $loginData, Login $login): LoginResource
     {
-
-        if (! $token = $login->handle($loginData)) {
-            throw ValidationException::withMessages(['email' => 'Invalid email or password.']);
+        if (! ($token = $login->handle($loginData))) {
+            throw ValidationException::withMessages([
+                'email' => 'Invalid email or password.',
+            ]);
         }
 
         return $token;

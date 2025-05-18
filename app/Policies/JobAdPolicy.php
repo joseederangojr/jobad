@@ -24,7 +24,8 @@ class JobAdPolicy
 
     public function update(?User $user, JobAd $jobAd): bool
     {
-        return $user?->role === 'employer' && $user->id === $jobAd->created_by_id;
+        return $user?->role === 'employer' &&
+            $user->id === $jobAd->created_by_id;
     }
 
     public function approve(?User $user): bool

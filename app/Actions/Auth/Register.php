@@ -22,6 +22,9 @@ class Register
         ]);
         $token = $auth->tokenById($user->id);
 
-        return new RegisterResource(accessToken: $token, expiresIn: $auth->factory()->getTTL() * 60);
+        return new RegisterResource(
+            accessToken: $token,
+            expiresIn: $auth->factory()->getTTL() * 60
+        );
     }
 }

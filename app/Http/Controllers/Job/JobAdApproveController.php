@@ -13,8 +13,12 @@ class JobAdApproveController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(ApproveJobAdData $data, ApproveJobAd $approve, GetJobAdById $get, int $id): JobAdResource
-    {
+    public function __invoke(
+        ApproveJobAdData $data,
+        ApproveJobAd $approve,
+        GetJobAdById $get,
+        int $id
+    ): JobAdResource {
         return JobAdResource::from($approve->handle($get->handle($id)));
     }
 }

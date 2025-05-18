@@ -12,16 +12,12 @@ class UserResource extends Data
         public int $id,
         public string $name,
         public string $email,
-        #[MapName('email_verified_at')]
-        public ?Carbon $emailVerifiedAt,
+        #[MapName('email_verified_at')] public ?Carbon $emailVerifiedAt,
 
-        #[MapName('created_at')]
-        public Carbon $createdAt,
+        #[MapName('created_at')] public Carbon $createdAt,
 
-        #[MapName('updated_at')]
-        public Carbon $updatedAt,
+        #[MapName('updated_at')] public Carbon $updatedAt,
 
-        #[MapName('deleted_at')]
-        public ?Carbon $deletedAt,
+        #[MapName('deleted_at')] public ?Carbon $deletedAt
     ) {}
 }

@@ -6,8 +6,5 @@ use Spatie\LaravelData\Data;
 
 class JobAdDescriptionData extends Data
 {
-    public function __construct(
-        public string $name,
-        public string $value
-    ) {}
+    public function __construct(public string $name, public string $value) {}
 }

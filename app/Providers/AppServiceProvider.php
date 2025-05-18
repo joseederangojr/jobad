@@ -26,13 +26,13 @@ class AppServiceProvider extends ServiceProvider
             $rule = Password::min(8);
 
             return $this->app->environment('production')
-                ? $rule->letters()
+                ? $rule
+                    ->letters()
                     ->mixedCase()
                     ->numbers()
                     ->symbols()
                     ->uncompromised()
                 : $rule;
-
         });
 
         Route::model('job', JobAd::class);

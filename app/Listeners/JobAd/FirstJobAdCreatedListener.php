@@ -16,9 +16,12 @@ class FirstJobAdCreatedListener
      */
     public function handle(FirstJobAdCreatedEvent $event): void
     {
-        Notification::send($this->admins->handle(), new FirstJobAdCreatedNotification(
-            job: $event->job,
-            employer: $event->employer
-        ));
+        Notification::send(
+            $this->admins->handle(),
+            new FirstJobAdCreatedNotification(
+                job: $event->job,
+                employer: $event->employer
+            )
+        );
     }
 }

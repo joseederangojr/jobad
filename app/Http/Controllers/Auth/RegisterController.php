@@ -12,8 +12,10 @@ class RegisterController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(RegisterData $registerData, Register $register): RegisterResource
-    {
+    public function __invoke(
+        RegisterData $registerData,
+        Register $register
+    ): RegisterResource {
         return $register->handle($registerData);
     }
 }

@@ -13,21 +13,20 @@ class StoreJobAdData extends Data
         public string $subcompany,
         public string $office,
         public string $department,
-        #[MapName('recruiting_category')]
-        public string $recruitingCategory,
+        #[MapName('recruiting_category')] public string $recruitingCategory,
 
-        #[MapName('employment_type')]
-        public string $employmentType,
+        #[MapName('employment_type')] public string $employmentType,
         public string $seniority,
         public string $schedule,
 
-        #[MapName('years_of_experience')]
-        public string $yearsOfExperience,
+        #[MapName('years_of_experience')] public string $yearsOfExperience,
         public array $keywords,
         public string $occupation,
-        #[MapName('occupation_category')]
-        public string $occupationCategory,
-        #[DataCollectionOf(JobAdDescriptionData::class), MapName('job_descriptions')]
+        #[MapName('occupation_category')] public string $occupationCategory,
+        #[
+            DataCollectionOf(JobAdDescriptionData::class),
+            MapName('job_descriptions')
+        ]
         public array $jobDescriptions
     ) {}
 }
