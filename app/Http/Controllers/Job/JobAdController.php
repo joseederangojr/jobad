@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Resource\JobAd\JobAdResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Event;
 
 class JobAdController extends Controller
@@ -22,7 +23,7 @@ class JobAdController extends Controller
         $user = Auth::user();
         $jobAds = $jobs->handle(Auth::user());
         if (! $user || $user->role === 'candidate') {
-            $extJobAds = $external->handle();
+            $extJobAds = Cache::remember('external', 120, fn () => $external->handle());
             $mergedJobAds = $extJobAds->merge($jobAds->items());
             $jobAds = collect([])->merge($jobAds);
             $jobAds->put('data', $mergedJobAds);
