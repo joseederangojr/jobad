@@ -30,7 +30,6 @@ class JobAdResource extends Resource
         public string $occupationCategory,
         #[MapName('job_descriptions')]
         public array $jobDescriptions,
-
         public ?string $status,
 
         public ?UserResource $createdBy,

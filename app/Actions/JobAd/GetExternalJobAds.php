@@ -29,6 +29,7 @@ class GetExternalJobAds
                 yearsOfExperience: $json->get('yearsOfExperience'),
                 keywords: array_map(fn ($str) => trim($str), explode(',', $json->get('keywords'))),
                 occupation: $json->get('occupation'),
+                status: 'external',
                 occupationCategory: $json->get('occupationCategory'),
                 jobDescriptions: $json->get('jobDescriptions')['jobDescription'],
                 createdAt: new Carbon($json->get('createdAt')),

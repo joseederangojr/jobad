@@ -21,9 +21,11 @@ class JobAdController extends Controller
     {
         $user = Auth::user();
         $jobAds = $jobs->handle(Auth::user());
-        if ($user->role === 'candidate') {
+        if (! $user || $user->role === 'candidate') {
             $extJobAds = $external->handle();
-            $jobAds = $extJobAds->merge($jobAds);
+            $mergedJobAds = $extJobAds->merge($jobAds->items());
+            $jobAds = collect([])->merge($jobAds);
+            $jobAds->put('data', $mergedJobAds);
             $jobAds->put('total', $jobAds->get('total') + 1);
         }
 
