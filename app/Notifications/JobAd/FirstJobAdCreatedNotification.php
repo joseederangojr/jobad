@@ -18,19 +18,21 @@ class FirstJobAdCreatedNotification extends Notification implements ShouldBroadc
     /**
      * Create a new notification instance.
      */
-    public function __construct(private User $employer, private JobAd $job) {}
+    public function __construct(
+        private User $employer,
+        private JobAd $job,
+        private GetUserById $getUser,
+        private GetJobAdById $getJob
+    ) {}
 
     /**
      * Get the broadcastable representation of the notification.
      */
-    public function toBroadcast(
-        object $notifiable,
-        GetUserById $getUser,
-        GetJobAdById $getJob
-    ): BroadcastMessage {
+    public function toBroadcast(object $notifiable): BroadcastMessage
+    {
         return new BroadcastMessage([
-            'employer' => $getUser->handle($this->employer->id),
-            'job' => $getJob->handle($this->job->id),
+            'employer' => $this->getUser->handle($this->employer->id),
+            'job' => $this->getJob->handle($this->job->id),
         ]);
     }
 
