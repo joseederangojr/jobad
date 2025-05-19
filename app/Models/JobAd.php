@@ -141,7 +141,7 @@ class JobAd extends Model
         return ['pending', 'approved', 'rejected'];
     }
 
-    public function getYearsOfExperienceAttribute(): array
+    public function getYearsOfExperienceOptionsAttribute(): array
     {
         return ['0-1', '2-4', '5-7', '8-10', '10+'];
     }
