@@ -8,7 +8,7 @@ class RejectJobAd
 {
     public function handle(JobAd $jobAd): JobAd
     {
-        $jobAd->update(['status' => 'reject']);
+        $jobAd->update(['status' => 'rejected']);
 
         return $jobAd->refresh();
     }

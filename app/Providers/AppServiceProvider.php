@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\JobAd;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 
@@ -34,7 +32,5 @@ class AppServiceProvider extends ServiceProvider
                     ->uncompromised()
                 : $rule;
         });
-
-        Route::model('job', JobAd::class);
     }
 }

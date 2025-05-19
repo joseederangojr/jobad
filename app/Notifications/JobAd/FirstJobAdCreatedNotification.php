@@ -7,11 +7,11 @@ use App\Actions\User\GetUserById;
 use App\Models\JobAd;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
 
-class FirstJobAdCreatedNotification extends Notification implements ShouldBroadcast
+class FirstJobAdCreatedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -36,7 +36,7 @@ class FirstJobAdCreatedNotification extends Notification implements ShouldBroadc
         ]);
     }
 
-    public function toBroadcastType(): string
+    public function broadcastType(): string
     {
         return 'first-job-created';
     }
@@ -49,7 +49,7 @@ class FirstJobAdCreatedNotification extends Notification implements ShouldBroadc
         ];
     }
 
-    public function toDatabaseType(): string
+    public function databaseType(): string
     {
         return 'first-job-created';
     }

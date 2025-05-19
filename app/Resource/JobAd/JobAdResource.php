@@ -5,6 +5,8 @@ namespace App\Resource\JobAd;
 use App\Resource\User\UserResource;
 use Illuminate\Support\Carbon;
 use Spatie\LaravelData\Attributes\MapName;
+use Spatie\LaravelData\Attributes\WithCast;
+use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\Resource;
 
 class JobAdResource extends Resource
@@ -29,14 +31,26 @@ class JobAdResource extends Resource
 
         public ?UserResource $createdBy,
         #[MapName('created_by_id')] public ?int $createdById,
-        #[MapName('created_at')] public Carbon $createdAt,
+        #[
+            MapName('created_at'),
+            WithCast(DateTimeInterfaceCast::class, format: 'Y-m-d\TH:i:s.u\Z')
+        ]
+        public Carbon $createdAt,
 
         public ?UserResource $updatedBy,
         #[MapName('updated_by_id')] public ?int $updatedById,
-        #[MapName('updated_at')] public Carbon $updatedAt,
+        #[
+            MapName('updated_at'),
+            WithCast(DateTimeInterfaceCast::class, format: 'Y-m-d\TH:i:s.u\Z')
+        ]
+        public Carbon $updatedAt,
 
         public ?UserResource $deletedBy,
         #[MapName('deleted_by_id')] public ?int $deletedById,
-        #[MapName('deleted_at')] public ?Carbon $deletedAt
+        #[
+            MapName('deleted_at'),
+            WithCast(DateTimeInterfaceCast::class, format: 'Y-m-d\TH:i:s.u\Z')
+        ]
+        public ?Carbon $deletedAt
     ) {}
 }

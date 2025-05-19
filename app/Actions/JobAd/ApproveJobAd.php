@@ -8,7 +8,7 @@ class ApproveJobAd
 {
     public function handle(JobAd $jobAd): JobAd
     {
-        $jobAd->update(['status' => 'approve']);
+        $jobAd->update(['status' => 'approved']);
         $jobAd->fresh();
 
         return $jobAd;

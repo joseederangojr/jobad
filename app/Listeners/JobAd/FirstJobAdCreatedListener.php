@@ -2,7 +2,9 @@
 
 namespace App\Listeners\JobAd;
 
+use App\Actions\JobAd\GetJobAdById;
 use App\Actions\User\GetAllAdmins;
+use App\Actions\User\GetUserById;
 use App\Events\JobAd\FirstJobAdCreatedEvent;
 use App\Notifications\JobAd\FirstJobAdCreatedNotification;
 use Illuminate\Support\Facades\Notification;
@@ -20,7 +22,9 @@ class FirstJobAdCreatedListener
             $this->admins->handle(),
             new FirstJobAdCreatedNotification(
                 job: $event->job,
-                employer: $event->employer
+                employer: $event->employer,
+                getUser: new GetUserById,
+                getJob: new GetJobAdById
             )
         );
     }
