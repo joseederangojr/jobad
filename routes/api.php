@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Job\JobAdApproveController;
 use App\Http\Controllers\Job\JobAdController;
 use App\Http\Controllers\Job\JobAdRejectController;
+use App\Http\Controllers\JobAd\JobAdOptionsController;
 use App\Http\Controllers\User\UserNotificationController;
 use App\Http\Controllers\User\UserReadNotificationController;
 use App\Http\Middleware\JwtMiddleware;
@@ -33,6 +34,9 @@ Route::middleware([JwtMiddleware::class])
     });
 
 Route::name('job-ad.')->group(function () {
+    Route::get('job-ad/options', JobAdOptionsController::class)->name(
+        'options'
+    );
     Route::get('job-ad/{id}', [JobAdController::class, 'show'])->name('show');
     Route::get('job-ad', [JobAdController::class, 'index'])->name('index');
 });

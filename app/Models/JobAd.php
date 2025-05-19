@@ -8,7 +8,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
-/** @mixin JobAd */
+/**
+ * @mixin JobAd
+ *
+ * @property-read array<int, string> $departmentOptions
+ * @property-read array<int, string> $recruitingCategoryOptions
+ * @property-read array<int, string> $employmentTypeOptions
+ * @property-read array<int, string> $seniorityOptions
+ * @property-read array<int, string> $scheduleOptions
+ * @property-read array<int, string> $statusOptions
+ * @property-read array<int, string> $yearsOfExperienceOptions
+ * @property-read array<int, string> $occupationOptions
+ * @property-read array<int, string> $occupationCategoryOptions
+ * */
 class JobAd extends Model
 {
     /** @use HasFactory<\Database\Factories\JobAdFactory> */
@@ -80,8 +92,88 @@ class JobAd extends Model
         });
     }
 
-    public function getRouteKeyName(): string
+    /**
+     * Getters
+     */
+    public function getDepartmentOptionsAttribute(): array
     {
-        return 'id';
+        return [
+            'recruiting',
+            'marketing',
+            'sales',
+            'engineering',
+            'finance',
+            'hr',
+        ];
+    }
+
+    public function getRecruitingCategoryOptionsAttribute(): array
+    {
+        return ['marketing', 'sales', 'recruiting', 'engineering'];
+    }
+
+    public function getEmploymentTypeOptionsAttribute(): array
+    {
+        return [
+            'parmanent',
+            'part-time',
+            'temporary',
+            'contract',
+            'freelance',
+            'internship',
+            'seasonal',
+            'on-call',
+        ];
+    }
+
+    public function getSeniorityOptionsAttribute(): array
+    {
+        return ['experienced', 'senior', 'middle', 'entry'];
+    }
+
+    public function getScheduleOptionsAttribute(): array
+    {
+        return ['full-Time', 'part-Time', 'flexible', 'fixed'];
+    }
+
+    public function getStatusOptionsAttribute(): array
+    {
+        return ['pending', 'approved', 'rejected'];
+    }
+
+    public function getYearsOfExperienceAttribute(): array
+    {
+        return ['0-1', '2-4', '5-7', '8-10', '10+'];
+    }
+
+    public function getOccupationOptionsAttribute(): array
+    {
+        return [
+            'software engineer',
+            'nurse',
+            'teacher',
+            'mechanic',
+            'marketing manager',
+            'data analyst',
+            'accountant',
+            'construction worker',
+            'lawyer',
+            'chef',
+        ];
+    }
+
+    public function geOccupationCategoryAttribute(): array
+    {
+        return [
+            'technology',
+            'healthcare',
+            'education',
+            'skilled trades',
+            'business',
+            'finance',
+            'construction',
+            'legal',
+            'hospitality',
+        ];
     }
 }

@@ -116,7 +116,7 @@ class JobAdFactory extends Factory
         ];
     }
 
-    public function owner(User $owner)
+    public function owner(User $owner): static
     {
         return $this->state(
             fn () => [
@@ -126,7 +126,7 @@ class JobAdFactory extends Factory
         );
     }
 
-    public function status(string $status)
+    public function status(string $status): static
     {
         return $this->state(
             fn () => [
