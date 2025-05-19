@@ -17,23 +17,82 @@ class JobAdFactory extends Factory
      */
     public function definition(): array
     {
-
-        $fake = fake();
-
         return [
             'name' => fake()->jobTitle(),
             'subcompany' => fake()->company(),
             'office' => fake()->country(),
-            'department' => "{$fake->name()} Department",
-            'recruiting_category' => "{$fake->name()} Recruiting Category",
-            'employment_type' => fake()->randomElement(['full-time', 'internship', 'part-time', 'contract']),
-            'seniority' => fake()->randomElement(['entry-level', 'mid-level', 'senior', 'lead', 'principal']),
-            'schedule' => fake()->randomElement(['on-site', 'remote', 'hybrid']),
-            'status' => fake()->randomElement(['pending', 'approved', 'rejected']),
-            'years_of_experience' => '2-5',
+            'department' => fake()->randomElement([
+                'recruiting',
+                'marketing',
+                'sales',
+                'engineering',
+                'finance',
+                'hr',
+            ]),
+            'recruiting_category' => fake()->randomElement([
+                'marketing',
+                'sales',
+                'recruiting',
+                'engineering',
+            ]),
+            'employment_type' => fake()->randomElement([
+                'parmanent',
+                'part-time',
+                'temporary',
+                'contract',
+                'freelance',
+                'internship',
+                'seasonal',
+                'on-call',
+            ]),
+            'seniority' => fake()->randomElement([
+                'experienced',
+                'senior',
+                'middle',
+                'entry',
+            ]),
+            'schedule' => fake()->randomElement([
+                'full-time',
+                'part-time',
+                'flexible',
+                'fixed',
+            ]),
+            'status' => fake()->randomElement([
+                'pending',
+                'approved',
+                'rejected',
+            ]),
+            'years_of_experience' => fake()->randomElement([
+                '0-1',
+                '2-4',
+                '5-7',
+                '8-10',
+                '10+',
+            ]),
             'keywords' => fake()->words(5),
-            'occupation' => "{$fake->name()} Occupation",
-            'occupation_category' => "{$fake->name()} Occupation Category",
+            'occupation' => fake()->randomElement([
+                'software engineer',
+                'nurse',
+                'teacher',
+                'mechanic',
+                'marketing manager',
+                'data analyst',
+                'accountant',
+                'construction worker',
+                'lawyer',
+                'chef',
+            ]),
+            'occupation_category' => fake()->randomElement([
+                'technology',
+                'healthcare',
+                'education',
+                'skilled trades',
+                'business',
+                'finance',
+                'construction',
+                'legal',
+                'hospitality',
+            ]),
             'job_descriptions' => [
                 [
                     'name' => 'About the Role',
@@ -59,16 +118,20 @@ class JobAdFactory extends Factory
 
     public function owner(User $owner)
     {
-        return $this->state(fn () => [
-            'created_by_id' => $owner->id,
-            'updated_by_id' => $owner->id,
-        ]);
+        return $this->state(
+            fn () => [
+                'created_by_id' => $owner->id,
+                'updated_by_id' => $owner->id,
+            ]
+        );
     }
 
     public function status(string $status)
     {
-        return $this->state(fn () => [
-            'status' => $status,
-        ]);
+        return $this->state(
+            fn () => [
+                'status' => $status,
+            ]
+        );
     }
 }

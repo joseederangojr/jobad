@@ -7,6 +7,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Job\JobAdApproveController;
 use App\Http\Controllers\Job\JobAdController;
 use App\Http\Controllers\Job\JobAdRejectController;
+use App\Http\Controllers\User\UserNotificationController;
+use App\Http\Controllers\User\UserReadNotificationController;
 use App\Http\Middleware\JwtMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -46,4 +48,18 @@ Route::middleware([JwtMiddleware::class])
         Route::patch('job-ad/{id}/reject', JobAdRejectController::class)->name(
             'reject'
         );
+    });
+
+Route::middleware([JwtMiddleware::class])
+    ->name('user.')
+    ->prefix('user')
+    ->group(function () {
+        Route::get('notification', UserNotificationController::class)->name(
+            'notification.index'
+        );
+
+        Route::post(
+            'notification',
+            UserReadNotificationController::class
+        )->name('notification.read');
     });

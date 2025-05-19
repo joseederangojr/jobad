@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Actions\User\GetUserNotifications;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Resource\Notification\NotificationResource;
+use Illuminate\Support\Facades\Auth;
 
 class UserNotificationController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * @return array<int, NotificationResource>
      */
-    public function __invoke(Request $request)
+    public function __invoke(GetUserNotifications $get): array
     {
-        //
+        return $get->handle(Auth::user());
     }
 }

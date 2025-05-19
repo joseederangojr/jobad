@@ -8,19 +8,20 @@ it('should reject by admin', function () {
     $admin = User::factory()->admin()->createOne();
     $jobAd = JobAd::factory(10)->owner(owner: $employer)->create();
 
-    $response = actingAsJWT($admin)->patchJson(route('api.job-ad.reject', ['id' => $jobAd->first()->id]));
+    $response = actingAsJWT($admin)->patchJson(
+        route('api.job-ad.reject', ['id' => $jobAd->first()->id])
+    );
 
-    $response
-        ->assertOk()
-        ->assertJsonPath('status', 'reject');
+    $response->assertOk()->assertJsonPath('status', 'rejected');
 });
 
 it('should not be able to reject by employer', function () {
     $employer = User::factory()->employer()->createOne();
     $jobAd = JobAd::factory()->owner(owner: $employer)->createOne();
 
-    $response = actingAsJWT($employer)->patchJson(route('api.job-ad.reject', ['id' => $jobAd->id]));
+    $response = actingAsJWT($employer)->patchJson(
+        route('api.job-ad.reject', ['id' => $jobAd->id])
+    );
 
-    $response
-        ->assertForbidden();
+    $response->assertForbidden();
 });
