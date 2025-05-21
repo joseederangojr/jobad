@@ -8,6 +8,6 @@ class GetJobAdById
 {
     public function handle(int $id): JobAd
     {
-        return JobAd::query()->whereId($id)->firstOrFail();
+        return JobAd::query()->with('createdBy')->whereId($id)->firstOrFail();
     }
 }

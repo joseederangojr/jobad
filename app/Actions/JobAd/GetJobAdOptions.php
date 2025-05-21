@@ -11,15 +11,6 @@ class GetJobAdOptions
     public function handle(): JobAdOptionsResource
     {
         $jobAd = JobAd::query()->make();
-        // dump(
-        //     JobAd::query()
-        //         ->select('years_of_experience')
-        //         ->distinct()
-        //         ->pluck('years_of_experience')
-        //         ->merge($jobAd->yearsOfExperienceOptions)
-        //         ->unique()
-        // );
-
         [
             $department,
             $recruitingCategory,
@@ -59,7 +50,7 @@ class GetJobAdOptions
                 ->select('seniority')
                 ->distinct()
                 ->pluck('seniority')
-                ->merge($jobAd->seniority)
+                ->merge($jobAd->seniorityOptions)
                 ->unique()
                 ->values()
                 ->toArray(),
@@ -67,7 +58,7 @@ class GetJobAdOptions
                 ->select('schedule')
                 ->distinct()
                 ->pluck('schedule')
-                ->merge($jobAd->schedule)
+                ->merge($jobAd->scheduleOptions)
                 ->unique()
                 ->values()
                 ->toArray(),
@@ -86,7 +77,7 @@ class GetJobAdOptions
                 ->merge($jobAd->yearsOfExperienceOptions)
                 ->unique()
                 ->values()
-                ->first(),
+                ->toArray(),
             fn () => JobAd::query()
                 ->select('occupation')
                 ->distinct()

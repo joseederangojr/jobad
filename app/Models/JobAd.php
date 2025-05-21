@@ -48,6 +48,9 @@ class JobAd extends Model
         ];
     }
 
+    /**
+     * Relationships
+     */
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by_id');

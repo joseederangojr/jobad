@@ -28,6 +28,7 @@ class GetJobAds
     private function query(GetJobAdsFilter $filter): Builder
     {
         return JobAd::query()
+            ->with('createdBy')
             ->orderByDesc('created_at')
             ->when(
                 $filter->seniority,
